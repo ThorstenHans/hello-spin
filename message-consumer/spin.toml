@@ -1,0 +1,15 @@
+spin_version = "1"
+authors = ["Thorsten Hans <thorsten.hans@gmail.com>"]
+description = "Consumes a message from redis"
+name = "message-consumer"
+trigger = { type = "redis", address = "redis://localhost:6379" }
+version = "0.1.0"
+
+[[component]]
+environment = { REDIS_ADDRESS = "redis://localhost:6379", REDIS_CHANNEL = "codetalks" }
+id = "message-consumer"
+source = "target/wasm32-wasi/release/message_consumer.wasm"
+[component.trigger]
+channel = "codetalks"
+[component.build]
+command = "cargo build --target wasm32-wasi --release"

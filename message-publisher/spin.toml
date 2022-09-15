@@ -1,0 +1,15 @@
+spin_version = "1"
+authors = ["Thorsten Hans <thorsten.hans@gmail.com>"]
+description = "Demo Message Publisher"
+name = "message-publisher"
+trigger = { type = "http", base = "/" }
+version = "0.1.0"
+
+[[component]]
+environment = { REDIS_ENDPOINT = "redis://localhost:6379" , REDIS_CHANNEL = "codetalks"}
+id = "message-publisher"
+source = "target/wasm32-wasi/release/message_publisher.wasm"
+[component.trigger]
+route = "/publish"
+[component.build]
+command = "cargo build --target wasm32-wasi --release"
